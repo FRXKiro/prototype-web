@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cryptid Watch Society</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦶</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="footprint-trail" aria-hidden="true"></div>
+<div id="bigfoot-banner" class="bigfoot-banner" aria-hidden="true">BIGFOOT WAS HERE</div>
+<div id="confetti-layer" aria-hidden="true"></div>
+
+<header class="topbar">
+  <button class="brand" id="logoBtn" title="Definitely just a logo. Nothing to see here.">
+    <span class="brand-mark">🦶</span> Cryptid Watch Society
+  </button>
+  <nav class="topnav">
+    <a href="#home">Home</a>
+    <a href="#roster">Roster</a>
+    <a href="#team">Team</a>
+    <a href="#access">Access</a>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <p class="eyebrow">Est. whenever someone finally believed us</p>
+    <h1>Something is out there.<br>We're just trying to prove it.</h1>
+    <p class="hero-copy">
+      The Cryptid Watch Society is a volunteer network of extremely serious hobbyists tracking
+      blurry photos, weird howls, and suspicious footprints across the county. Membership includes
+      a codename, a specialty badge, and exactly zero proof of anything.
+    </p>
+    <div class="hero-actions">
+      <a href="#roster" class="btn btn-ghost">See the field roster</a>
+      <a href="#access" class="btn btn-primary">Join the Watch</a>
+    </div>
+    <p class="notice">
+      Prototype demo — please don't use a real email or password here. This exists to show off
+      a login flow, not to store your actual secrets.
+    </p>
+  </section>
+
+  <section id="roster" class="roster">
+    <p class="eyebrow">Field roster</p>
+    <h2>Agents currently on watch</h2>
+    <p id="rosterStatus" class="roster-status">Loading agent files…</p>
+    <div id="rosterGrid" class="roster-grid"></div>
+  </section>
+
+  <section id="team" class="team">
+    <p class="eyebrow">Behind the treeline</p>
+    <h2>The people who actually built this</h2>
+    <p class="team-intro">
+      No cryptids were involved in writing this code — just three guys, a deadline, and a
+      questionable division of labor.
+    </p>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/team-daryl.jpg" alt="Daryl" class="team-photo" />
+        <div class="team-name">Daryl</div>
+        <div class="team-role">Frontend</div>
+        <p class="team-desc">Built every screen you're looking at right now, including the
+          footprints you probably just made appear. Personally responsible for the site
+          not looking like a Word document.</p>
+      </div>
+      <div class="team-card">
+        <img src="images/team-hannel.jpg" alt="Hannel" class="team-photo" />
+        <div class="team-name">Hannel</div>
+        <div class="team-role">Backend</div>
+        <p class="team-desc">Wired up the server and the database so accounts, logins, and
+          belief scores actually save somewhere. If the roster loads, thank him. If it
+          doesn't, also thank him — he's working on it.</p>
+      </div>
+      <div class="team-card">
+        <img src="images/team-mark.jpg" alt="Mark" class="team-photo" />
+        <div class="team-name">Mark</div>
+        <div class="team-role">Verbal Support</div>
+        <p class="team-desc">Did not write a single line of code. Provided moral support,
+          strong opinions on button colors, and the occasional "have you tried refreshing
+          it" at exactly the wrong moment. Invaluable, somehow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="access">
+    <p class="eyebrow">Access gateway</p>
+    <h2>Sign in or join the Society</h2>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Sign in</button>
+        <button class="tab-btn" data-tab="register">Join up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>Email
+          <input type="email" name="email" required placeholder="agent@example.com" />
+        </label>
+        <label>Password
+          <input type="password" name="password" required placeholder="••••••••" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Authenticate</button>
+        <p class="form-msg" id="loginMsg"></p>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <label>Codename
+          <input type="text" name="codename" required minlength="3" maxlength="24" placeholder="MossWalker99" />
+        </label>
+        <label>Email
+          <input type="email" name="email" required placeholder="agent@example.com" />
+        </label>
+        <label>Password
+          <input type="password" name="password" required minlength="6" placeholder="6+ characters" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Create field badge</button>
+        <p class="form-msg" id="registerMsg"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dashboard hidden">
+    <p class="eyebrow">Field terminal</p>
+    <h2 id="dashGreeting">Welcome back, agent.</h2>
+    <p class="dash-specialty" id="dashSpecialty"></p>
+
+    <div class="believe-card">
+      <p class="believe-label">Belief meter</p>
+      <div class="believe-bar"><div id="believeFill" class="believe-fill"></div></div>
+      <p id="believeValue" class="believe-value">0%</p>
+      <button id="believeBtn" class="btn btn-primary">I believe</button>
+      <p id="believeToast" class="believe-toast"></p>
+    </div>
+
+    <button id="logoutBtn" class="btn btn-ghost">Log out</button>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Cryptid Watch Society — a demo login prototype. No cryptids were harmed, or found.</p>
+  <button id="secretBtn" class="secret-btn">do not press</button>
+</footer>
+
+<div id="conspiracyModal" class="modal hidden">
+  <div class="modal-card">
+    <button id="closeModal" class="modal-close">×</button>
+    <h3>🧵 The Board 🧵</h3>
+    <p id="conspiracyText" class="conspiracy-text"></p>
+    <button id="regenBtn" class="btn btn-ghost">Connect more string</button>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
