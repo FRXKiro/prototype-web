@@ -14,10 +14,28 @@
 <div id="footprint-trail" aria-hidden="true"></div>
 <div id="bigfoot-banner" class="bigfoot-banner" aria-hidden="true">BIGFOOT WAS HERE</div>
 <div id="confetti-layer" aria-hidden="true"></div>
+<div id="logoSummon" class="logo-summon" aria-hidden="true"></div>
+<div id="idleToast" class="idle-toast hidden">Are you still there, or did something get you?</div>
+
+<div id="konamiOverlay" class="konami-overlay hidden" aria-hidden="true">
+  <div id="konamiFootprints" class="konami-footprints"></div>
+  <div class="konami-text">ANCIENT CRYPTID RITUAL ACTIVATED</div>
+  <div id="konamiCooldown" class="konami-cooldown"></div>
+</div>
+
+<div id="wantedPoster" class="wanted-poster hidden" aria-hidden="true">
+  <div class="wanted-card">
+    <button id="closeWanted" class="wanted-close">×</button>
+    <div class="wanted-title">WANTED</div>
+    <div class="wanted-img">🦶</div>
+    <div class="wanted-name">Bigfoot</div>
+    <p class="wanted-desc">Wanted for crimes against snack inventory.<br>Reward: one (1) granola bar, slightly eaten.</p>
+  </div>
+</div>
 
 <header class="topbar">
   <button class="brand" id="logoBtn" title="Definitely just a logo. Nothing to see here.">
-    <span class="brand-mark">🦶</span> Cryptid Watch Society
+    <span class="brand-mark" id="brandMark">🦶</span> <span id="brandText">Cryptid Watch Society</span>
   </button>
   <nav class="topnav">
     <a href="#home">Home</a>
@@ -30,7 +48,7 @@
 <main>
   <section id="home" class="hero">
     <p class="eyebrow">Est. whenever someone finally believed us</p>
-    <h1>Something is out there.<br>We're just trying to prove it.</h1>
+    <h1 id="heroHeadline">Something is out there.<br>We're just trying to prove it.</h1>
     <p class="hero-copy">
       The Cryptid Watch Society is a volunteer network of extremely serious hobbyists tracking
       blurry photos, weird howls, and suspicious footprints across the county. Membership includes
@@ -57,7 +75,7 @@
     <p class="eyebrow">Behind the treeline</p>
     <h2>The people who actually built this</h2>
     <p class="team-intro">
-      No cryptids were involved in writing this code — just three guys, a deadline, and a
+      No cryptids were involved in writing this code — just four guys, a deadline, and a
       questionable division of labor.
     </p>
     <div class="team-grid">
@@ -85,6 +103,15 @@
           strong opinions on button colors, and the occasional "have you tried refreshing
           it" at exactly the wrong moment. Invaluable, somehow.</p>
       </div>
+      <div class="team-card">
+        <img src="images/team-jericho.jpg" alt="Jericho" class="team-photo" />
+        <div class="team-name">Jericho</div>
+        <div class="team-role">Pancit Canton Cook</div>
+        <p class="team-desc">Not on the payroll, not in the codebase, but absolutely
+          essential to the project timeline. Kept the team fed during every all-nighter
+          with a highly classified pancit canton recipe. Refuses to document it,
+          citing "trade secrets" and "you wouldn't survive the spice."</p>
+      </div>
     </div>
   </section>
 
@@ -109,6 +136,14 @@
         <p class="form-msg" id="loginMsg"></p>
       </form>
 
+      <div id="captchaGate" class="captcha-gate hidden">
+        <p class="captcha-text">5 failed attempts. Suspicious. Prove you're not a cryptid before trying again.</p>
+        <div class="captcha-box" id="captchaBox">
+          <button id="captchaBtn" type="button" class="btn btn-primary">I am human</button>
+        </div>
+        <p class="form-msg" id="captchaMsg"></p>
+      </div>
+
       <form id="registerForm" class="auth-form hidden">
         <label>Codename
           <input type="text" name="codename" required minlength="3" maxlength="24" placeholder="MossWalker99" />
@@ -129,6 +164,8 @@
     <p class="eyebrow">Field terminal</p>
     <h2 id="dashGreeting">Welcome back, agent.</h2>
     <p class="dash-specialty" id="dashSpecialty"></p>
+    <p class="dash-badge hidden" id="dashBadge">🛸 Cryptid Tier: Unhinged</p>
+    <p class="dash-bigfoot hidden" id="dashBigfoot">Oh. OH. It's really you. Please don't eat the moderators.</p>
 
     <div class="believe-card">
       <p class="believe-label">Belief meter</p>
@@ -153,6 +190,18 @@
     <h3>🧵 The Board 🧵</h3>
     <p id="conspiracyText" class="conspiracy-text"></p>
     <button id="regenBtn" class="btn btn-ghost">Connect more string</button>
+  </div>
+</div>
+
+<div id="logoutModal" class="modal hidden">
+  <div class="modal-card">
+    <div class="logout-emoji">🥲🦶</div>
+    <h3>Are you sure?</h3>
+    <p class="logout-text">He'll miss you 🥺</p>
+    <div class="logout-actions">
+      <button id="stayBtn" class="btn btn-primary">Stay</button>
+      <button id="leaveBtn" class="btn btn-ghost">Leave anyway (coward)</button>
+    </div>
   </div>
 </div>
 

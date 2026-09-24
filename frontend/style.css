@@ -515,3 +515,473 @@ h1, h2, h3 {
 @media (max-width: 600px) {
   .topnav { gap: 0.9rem; font-size: 0.85rem; }
 }
+
+/* ---------- Idle toast ---------- */
+
+.idle-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--card);
+  border: 1px solid var(--moss-dim);
+  color: var(--text);
+  padding: 0.7rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  z-index: 55;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.idle-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Logo long-press summon ---------- */
+
+.logo-summon {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  z-index: 40;
+  pointer-events: none;
+}
+.summon-wave {
+  width: 120px;
+  height: 30px;
+}
+.summon-word {
+  position: absolute;
+  left: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--amber);
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: summonFloat 1.8s ease forwards;
+  white-space: nowrap;
+}
+@keyframes summonFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0.8); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-50px) scale(1.05); }
+}
+.summon-fizzle {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0;
+  animation: summonFizzle 1.5s ease forwards 1.6s;
+  white-space: nowrap;
+}
+@keyframes summonFizzle {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Konami ritual overlay ---------- */
+
+.konami-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #050805;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.konami-overlay.show {
+  animation: konamiShow 5.5s ease forwards;
+  pointer-events: auto;
+}
+@keyframes konamiShow {
+  0% { opacity: 0; }
+  4% { opacity: 1; background: #eef2ea; }
+  10% { opacity: 1; background: #050805; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.konami-footprints {
+  position: absolute;
+  inset: 0;
+}
+.konami-footprints span {
+  position: absolute;
+  font-size: 2.2rem;
+  top: 45%;
+  opacity: 0;
+  animation: konamiMarch 2.2s ease forwards;
+}
+@keyframes konamiMarch {
+  0% { opacity: 0; transform: translateX(-40px) scale(0.8); }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(40px) scale(1.1); }
+}
+.konami-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 5vw, 2.6rem);
+  color: var(--amber);
+  text-align: center;
+  padding: 0 1.5rem;
+  opacity: 0;
+  animation: konamiTextShow 5.5s ease forwards;
+  z-index: 2;
+}
+@keyframes konamiTextShow {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.konami-cooldown {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  opacity: 0;
+  animation: konamiCooldownShow 5.5s ease forwards;
+  z-index: 2;
+}
+@keyframes konamiCooldownShow {
+  0% { opacity: 0; }
+  70% { opacity: 0; }
+  85% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* ---------- Wanted poster ---------- */
+
+.wanted-poster {
+  position: fixed;
+  top: 90px;
+  right: 24px;
+  z-index: 55;
+  transform: translateX(120%) rotate(3deg);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wanted-poster.show { transform: translateX(0) rotate(-2deg); }
+
+.wanted-card {
+  background: #efe3c4;
+  border: 3px double #6b4a1f;
+  border-radius: 4px;
+  padding: 1.2rem 1.4rem;
+  width: 220px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.wanted-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #6b4a1f;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.wanted-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #6b4a1f;
+  letter-spacing: 0.1em;
+}
+.wanted-img { font-size: 3rem; margin: 0.4rem 0; }
+.wanted-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #4a3212;
+  margin-bottom: 0.5rem;
+}
+.wanted-desc {
+  font-size: 0.78rem;
+  color: #4a3212;
+  line-height: 1.4;
+}
+
+/* ---------- Captcha gate ---------- */
+
+.captcha-gate {
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+.captcha-text {
+  color: var(--amber);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.captcha-box {
+  position: relative;
+  height: 120px;
+}
+.captcha-box .btn {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.25s ease, left 0.25s ease;
+}
+
+/* ---------- Logout confirm modal ---------- */
+
+.logout-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.logout-text { color: var(--text-muted); margin-bottom: 1.4rem; }
+.logout-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- Brand glitch ---------- */
+
+.glitching {
+  animation: brandGlitch 0.08s steps(2) infinite;
+}
+@keyframes brandGlitch {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-1px, 1px); }
+  100% { transform: translate(1px, -1px); }
+}
+
+
+/* ================= Easter eggs, round 2 ================= */
+
+/* ---------- Bigfoot golden roster card ---------- */
+.agent-card.golden {
+  --fill: var(--card);
+  position: relative;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--fill), var(--fill)) padding-box,
+    linear-gradient(120deg, #a87313, #f2b134, #fff3b0, #f2b134, #a87313) border-box;
+  background-size: 100% 100%, 250% 250%;
+  box-shadow: 0 0 18px rgba(242, 177, 52, 0.35);
+  animation: goldShimmer 3s ease-in-out infinite alternate;
+}
+.agent-card.golden:hover { --fill: var(--card-hover); }
+@keyframes goldShimmer {
+  from { background-position: 0 0, 0% 50%; }
+  to { background-position: 0 0, 100% 50%; }
+}
+.agent-card.golden::before,
+.agent-card.golden::after {
+  content: "✨";
+  position: absolute;
+  font-size: 0.95rem;
+  pointer-events: none;
+  animation: twinkle 1.8s ease-in-out infinite;
+}
+.agent-card.golden::before { top: -9px; right: 14px; }
+.agent-card.golden::after { bottom: -9px; left: 14px; animation-delay: 0.9s; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+
+.agent-badge { font-size: 0.95rem; margin-left: 0.2rem; cursor: help; }
+
+.dash-bigfoot {
+  color: var(--amber);
+  font-family: var(--font-display);
+  border: 1px solid var(--amber-dim);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 18px rgba(242, 177, 52, 0.25);
+}
+.dash-badge {
+  display: inline-block;
+  color: var(--amber);
+  border: 1px solid var(--amber-dim);
+  border-radius: 20px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.85rem;
+  margin: 0 0 1.2rem;
+}
+
+/* ---------- 100% belief: flash + UFO ---------- */
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 95;
+  opacity: 0;
+  pointer-events: none;
+}
+.flash-overlay.show { animation: whiteFlash 0.9s ease-out forwards; }
+@keyframes whiteFlash {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.ufo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 3.5rem;
+  z-index: 96;
+  pointer-events: none;
+  opacity: 0;
+}
+.ufo.fly { animation: ufoZip 3.1s ease-in-out forwards; }
+@keyframes ufoZip {
+  0% { opacity: 1; transform: translate(-15vw, 10vh) rotate(-12deg); }
+  20% { transform: translate(25vw, 24vh) rotate(10deg); }
+  40% { transform: translate(65vw, 8vh) rotate(-8deg); }
+  60% { opacity: 1; transform: translate(calc(50vw - 28px), 38vh) rotate(0deg); }
+  90% { opacity: 1; transform: translate(calc(50vw - 28px), 36vh) rotate(0deg); }
+  100% { opacity: 0; transform: translate(calc(50vw - 28px), 34vh) rotate(0deg); }
+}
+
+.ascend-msg {
+  position: fixed;
+  top: calc(38vh + 4.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 540px);
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: var(--amber);
+  text-shadow: 0 0 20px rgba(242, 177, 52, 0.6);
+  background: rgba(11, 19, 16, 0.85);
+  border: 1px solid var(--amber-dim);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  z-index: 96;
+  opacity: 0;
+  pointer-events: none;
+}
+.ascend-msg.show { animation: ascendMsg 3.4s ease 1.8s forwards; }
+@keyframes ascendMsg {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- Overscroll: the blurry "photo" ---------- */
+.moth-section {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  text-align: center;
+}
+.moth-photo {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  border: 8px solid #e9e4d3;
+  border-bottom-width: 34px;
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 25% 75%, #2f4230, transparent 55%),
+    radial-gradient(circle at 80% 25%, #1d2c3a, transparent 50%),
+    #0d130f;
+  filter: blur(2px) contrast(1.1) saturate(0.7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: rotate(-1.5deg);
+}
+.moth-trunk {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 18%, rgba(0, 0, 0, 0.55) 28%, transparent 40%);
+}
+.moth-blob {
+  position: absolute;
+  top: 38%;
+  left: 46%;
+  width: 76px;
+  height: 48px;
+  border-radius: 50% 40% 60% 45%;
+  background: radial-gradient(ellipse, rgba(255, 250, 220, 0.95), rgba(255, 240, 190, 0.35) 60%, transparent 75%);
+  filter: blur(7px);
+  animation: mothDrift 5s ease-in-out infinite;
+}
+@keyframes mothDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-14px, 8px); }
+}
+.moth-stamp {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.moth-caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text);
+  margin-top: 1.2rem;
+}
+
+/* ---------- Yeti mode ---------- */
+.yeti-tint {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  background: rgba(150, 210, 255, 0.14);
+  -webkit-backdrop-filter: sepia(0.6) hue-rotate(165deg) saturate(1.3) brightness(1.12);
+  backdrop-filter: sepia(0.6) hue-rotate(165deg) saturate(1.3) brightness(1.12);
+}
+.yeti-tint.on { opacity: 1; }
+
+.snow-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  pointer-events: none;
+  overflow: hidden;
+}
+.snowflake {
+  position: absolute;
+  top: -2rem;
+  color: #fff;
+  animation: snowfall linear forwards;
+}
+@keyframes snowfall {
+  to { transform: translate(var(--drift, 30px), 110vh) rotate(360deg); }
+}
+
+.yeti-msg {
+  position: fixed;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  width: max-content;
+  max-width: 90vw;
+  text-align: center;
+  z-index: 86;
+  background: #0c2a3d;
+  color: #dff3ff;
+  border: 1px solid #7cc4ee;
+  border-radius: 30px;
+  padding: 0.7rem 1.3rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.yeti-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
